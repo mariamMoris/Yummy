@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yummy</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body class="bg-black">
+    <div
+      class="navbar position-fixed min-vh-100 d-flex justify-content-evenly p-0"
+    >
+      <nav
+        class="nav-body bg-black text-white d-flex flex-column justify-content-between align-content-between min-vh-100 p-3 position-relative"
+      >
+        <div>
+          <ul class="links list-unstyled pt-3">
+            <li class="mt-3" id="Search">Search</li>
+            <li class="mt-3" id="Categories">Categories</li>
+            <li class="mt-3" id="Area">Area</li>
+            <li class="mt-3" id="Ingredients">Ingredients</li>
+            <li class="mt-3" id="Contact-Us">Contact Us</li>
+          </ul>
+        </div>
+        <footer class="">
+          <div class="mt-3">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <div>
+            <p class="mt-1">
+              Copyright Â© 2019 All Rights <br />
+              Reserved.
+            </p>
+          </div>
+        </footer>
+      </nav>
+      <div
+        class="nav-header text-black bg-white d-flex flex-column justify-content-between min-vh-100 align-items-center mt-5"
+      >
+        <img src="images/logo.png" alt="" class="w-100 pt-4" />
+        <i class="changeIcon fa-solid fa-align-justify fs-1"></i>
+        <div class="pb-4">
+          <i class="fa-solid fa-globe fs-5 pt-1"></i>
+          <div>
+            <i class="fa-solid fa-share-nodes fs-5"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="searchBox"></div>
+      <div class="row g-5 py-5"></div>
+    </div>
+    <div class="contant">
+      <div class="contact min-vh-100">
+        <div class="container text-center">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <input
+                id="nameInput"
+                oninput="nameValidation()"
+                type="text"
+                class="form-control"
+                placeholder="Enter Your Name"
+              />
+              <p id="nameAlert" class="alert alert-danger w-100 mt-2 d-none">
+                Special characters and numbers not allowed
+              </p>
+            </div>
+            <div class="col-md-6">
+              <input
+                id="emailInput"
+                oninput="emailValidation()"
+                type="email"
+                class="form-control"
+                placeholder="Enter Your Email"
+              />
+              <p id="emailAlert" class="alert alert-danger w-100 mt-2 d-none">
+                Email not valid *exemple@yyy.zzz
+              </p>
+            </div>
+            <div class="col-md-6">
+              <input
+                id="phoneInput"
+                oninput="phoneValidation()"
+                type="text"
+                class="form-control"
+                placeholder="Enter Your Phone"
+              />
+              <p id="phoneAlert" class="alert alert-danger w-100 mt-2 d-none">
+                Enter valid Phone Number
+              </p>
+            </div>
+            <div class="col-md-6">
+              <input
+                id="ageInput"
+                oninput="ageValidation()"
+                type="number"
+                class="form-control"
+                placeholder="Enter Your Age"
+              />
+              <p id="ageAlert" class="alert alert-danger w-100 mt-2 d-none">
+                Enter valid age
+              </p>
+            </div>
+            <div class="col-md-6">
+              <input
+                id="passwordInput"
+                oninput="passwordValidation()"
+                type="password"
+                class="form-control"
+                placeholder="Enter Your Password"
+              />
+              <p
+                id="passwordAlert"
+                class="alert alert-danger w-100 mt-2 d-none"
+              >
+                Enter valid password *Minimum eight characters, at least one
+                letter and one number:*
+              </p>
+            </div>
+            <div class="col-md-6">
+              <input
+                id="repasswordInput"
+                oninput="repasswordValidation()"
+                type="password"
+                class="form-control"
+                placeholder="Repassword"
+              />
+              <p
+                id="repasswordAlert"
+                class="alert alert-danger w-100 mt-2 d-none"
+              >
+                Enter valid repassword
+              </p>
+            </div>
+          </div>
+          <button
+            id="submitBtn"
+            disabled
+            class="btn btn-outline-danger px-2 mt-3"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="loading">
+      <span class="loader"></span>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
