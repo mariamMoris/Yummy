@@ -62,10 +62,10 @@ function displayCategories(arr) {
               arr[i].strCategoryThumb
             }" alt="" class="w-100 rounded-2">
             <div class="layer position-absolute border rounded-2 text-center">
-            <h3>${arr[i].strCategory}</h3>
-            <p>${arr[i].strCategoryDescription
+            <h3 class ="">${arr[i].strCategory}</h3>
+            <p class="p-1">${arr[i].strCategoryDescription
               .split(" ")
-              .slice(0, 20)
+              .slice(0, 18)
               .join(" ")}</p> 
             </div>
         </div>
@@ -145,7 +145,7 @@ function displayFilterByArea(arr) {
         <div class="img-layer position-relative overflow-hidden" onclick = mealsDetails(${arr[i].idMeal})>
             <img src="${arr[i].strMealThumb}" alt="" class="w-100 rounded-2">
             <div class="layer position-absolute border rounded-2 d-flex align-items-center ">
-                <h3>${arr[i].strMeal}</h3>
+                <h3 class="p-2">${arr[i].strMeal}</h3>
             </div>
         </div> 
     </div>
@@ -201,7 +201,7 @@ function displayFilterIngredients(arr) {
         <div class="img-layer position-relative overflow-hidden" onclick = mealsDetails(${arr[i].idMeal})>
             <img src="${arr[i].strMealThumb}" alt="" class="w-100 rounded-2">
             <div class="layer position-absolute border rounded-2 d-flex align-items-center ">
-                <h3>${arr[i].strMeal}</h3>
+                <h3 class="p-2">${arr[i].strMeal}</h3>
             </div>
         </div> 
     </div>
@@ -268,7 +268,6 @@ function displaySearch() {
   closeNav();
   data.innerHTML = "";
   contant.innerHTML = "";
-  $(".loading").fadeIn(500);
   search.innerHTML = `
     <div class="row g-5 py-5 justify-content-center align-items-center ">
                 <div class="col-md-6">
@@ -279,7 +278,6 @@ function displaySearch() {
                 </div>
    </div> 
     `;
-  $(".loading").fadeOut(500);
 }
 async function searchByName(name) {
   data.innerHTML = "";
@@ -288,8 +286,8 @@ async function searchByName(name) {
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`
   );
   const response = await api.json();
-  response.meals ? displayMeals(response.meals) : displayMeals([]);
   $(".loading").fadeOut(500);
+  response.meals ? displayMeals(response.meals) : displayMeals([]);
 }
 async function searchByFirstLetter(letter) {
   data.innerHTML = "";
@@ -310,7 +308,7 @@ function displayMeals(arr) {
         <div class="img-layer position-relative overflow-hidden" onclick = mealsDetails(${arr[i].idMeal})>
             <img src="${arr[i].strMealThumb}" alt="" class="w-100 rounded-2">
             <div class="layer position-absolute border rounded-2 d-flex align-items-center ">
-                <h3>${arr[i].strMeal}</h3>
+                <h3 class="p-2">${arr[i].strMeal}</h3>
             </div>
         </div> 
     </div>
@@ -330,129 +328,135 @@ function displayContact() {
     <div class="container text-center">
         <div class="row g-4">
             <div class="col-md-6">
-                <input id="nameInput" oninput="nameValidation()" type="text" class="form-control" placeholder="Enter Your Name">
-                <p id="nameAlert" class="alert alert-danger w-100 mt-2 d-none">
-                    Special characters and numbers not allowed
+                <input id="name" onkeyup="inputsValidation()"  type="text" class="form-control" placeholder="Enter Your Name">
+                <p id="resultName" >
                 </p>
             </div>
             <div class="col-md-6">
-                <input id="emailInput" oninput="emailValidation()" type="email" class="form-control " placeholder="Enter Your Email">
-                <p id="emailAlert" class="alert alert-danger w-100 mt-2 d-none">
-                    Email not valid *exemple@yyy.zzz
+                <input id="email" onkeyup="inputsValidation()"  type="email" class="form-control " placeholder="Enter Your Email">
+                <p id="result" >
                 </p>
             </div>
             <div class="col-md-6">
-                <input id="phoneInput" oninput="phoneValidation()" type="text" class="form-control " placeholder="Enter Your Phone">
-                <p id="phoneAlert" class="alert alert-danger w-100 mt-2 d-none">
-                    Enter valid Phone Number
+                <input id="phone" onkeyup="inputsValidation()"  type="number" class="form-control " placeholder="Enter Your Phone">
+                <p id="resultPhone">
                 </p>
             </div>
             <div class="col-md-6">
-                <input id="ageInput" oninput="ageValidation()" type="number" class="form-control " placeholder="Enter Your Age">
-                <p id="ageAlert" class="alert alert-danger w-100 mt-2 d-none">
-                    Enter valid age
+                <input id="age" onkeyup="inputsValidation()" type="number" class="form-control " placeholder="Enter Your Age">
+                <p id="resultAge" ">
                 </p>
             </div>
             <div class="col-md-6">
-                <input  id="passwordInput" oninput="passwordValidation()" type="password" class="form-control " placeholder="Enter Your Password">
-                <p id="passwordAlert" class="alert alert-danger w-100 mt-2 d-none">
-                    Enter valid password *Minimum eight characters, at least one letter and one number:*
+                <input  id="pass" onkeyup="inputsValidation()" type="password" class="form-control " placeholder="Enter Your Password">
+                <p id="resultPass" >
                 </p>
             </div>
             <div class="col-md-6">
-                <input  id="repasswordInput" oninput="repasswordValidation()" type="password" class="form-control " placeholder="Repassword">
-                <p id="repasswordAlert" class="alert alert-danger w-100 mt-2 d-none">
-                    Enter valid repassword 
+                <input  id="repass" onkeyup="inputsValidation()"  type="password" class="form-control " placeholder="Repassword">
+                <p id="resultRepass" >
                 </p>
             </div>
         </div>
-        <button id="submitBtn" on disabled class="btn btn-outline-danger px-2 mt-3">Submit</button>
+        <button id="submitBtn" disabled class="btn btn-outline-danger px-2 mt-3">Submit</button>
     </div>
 </div> 
     `;
   $(".loading").fadeOut(500);
 }
-let nameInput = document.getElementById("nameInput");
-let emailInput = document.getElementById("emailInput");
-let phoneInput = document.getElementById("phoneInput");
-let ageInput = document.getElementById("ageInput");
-let passwordInput = document.getElementById("passwordInput");
-let repasswordInput = document.getElementById("repasswordInput");
-let submit = document.getElementById("submitBtn");
 
-function nameValidation() {
+function validateName() {
+  const $resultName = $("#resultName");
   const pattern = /^[a-zA-Z\s]+$/i;
-  if (!pattern.test(nameInput.value)) {
-    document.getElementById("nameAlert").classList.replace("d-none", "d-block");
+  if (pattern.test($("#name").val())) {
+    $resultName.text($("#name").val() + " is valid.");
+    $resultName.css("color", "green");
+    return true;
   } else {
-    document.getElementById("nameAlert").classList.replace("d-block", "d-none");
+    $resultName.text($("#name").val() + " is invalid.");
+    $resultName.css("color", "red");
+    return false;
   }
 }
-function emailValidation() {
-  const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
-  if (!pattern.test(emailInput.value)) {
-    document
-      .getElementById("emailAlert")
-      .classList.replace("d-none", "d-block");
+function validateEmail() {
+  const $result = $("#result");
+  const pattern =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (pattern.test($("#email").val())) {
+    $result.text($("#email").val() + " is valid.");
+    $result.css("color", "green");
+    return true;
   } else {
-    document
-      .getElementById("emailAlert")
-      .classList.replace("d-block", "d-none");
+    $result.text($("#email").val() + " is invalid.");
+    $result.css("color", "red");
+    return false;
   }
 }
-function phoneValidation() {
-  const pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-  if (!pattern.test(phoneInput.value)) {
-    document
-      .getElementById("phoneAlert")
-      .classList.replace("d-none", "d-block");
+function validatePhone() {
+  const $resultPhone = $("#resultPhone");
+  const pattern = /^(01)[0125][0-9]{8}$/;
+  if (pattern.test($("#phone").val())) {
+    $resultPhone.text($("#phone").val() + " is valid.");
+    $resultPhone.css("color", "green");
+    return true;
   } else {
-    document
-      .getElementById("phoneAlert")
-      .classList.replace("d-block", "d-none");
+    $resultPhone.text($("#phone").val() + " Enter Egyption phone number");
+    $resultPhone.css("color", "red");
+    return false;
   }
 }
-function ageValidation() {
-  const pattern = /^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/;
-  if (!pattern.test(ageInput.value)) {
-    document.getElementById("ageAlert").classList.replace("d-none", "d-block");
+function validateAge() {
+  const $resultAge = $("#resultAge");
+  const pattern = /^([1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/;
+  if (pattern.test($("#age").val())) {
+    $resultAge.text($("#age").val() + " is valid.");
+    $resultAge.css("color", "green");
+    return true;
   } else {
-    document.getElementById("ageAlert").classList.replace("d-block", "d-none");
+    $resultAge.text($("#age").val() + " Enter age from 1 to 200");
+    $resultAge.css("color", "red");
+    return false;
   }
 }
-function passwordValidation() {
+function validatePass() {
+  const $resultPass = $("#resultPass");
   const pattern = /^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/;
-  if (!pattern.test(passwordInput.value)) {
-    document
-      .getElementById("passwordAlert")
-      .classList.replace("d-none", "d-block");
+  if (pattern.test($("#pass").val())) {
+    $resultPass.text($("#pass").val() + " is valid.");
+    $resultPass.css("color", "green");
+    return true;
   } else {
-    document
-      .getElementById("passwordAlert")
-      .classList.replace("d-block", "d-none");
+    $resultPass.text(
+      $("#pass").val() +
+        " Enter valid password *Minimum eight characters, at least one letter and one number:*."
+    );
+    $resultPass.css("color", "red");
+    return false;
   }
 }
-function repasswordValidation() {
-  const pattern = /^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/;
-  if (!pattern.test(repasswordInput.value)) {
-    document
-      .getElementById("repasswordAlert")
-      .classList.replace("d-none", "d-block");
+function repassValidate() {
+  const $resultRepass = $("#resultRepass");
+  if ($("#pass").val() == $("#repass").val()) {
+    $resultRepass.text(" is valid.");
+    $resultRepass.css("color", "green");
+    return true;
   } else {
-    document
-      .getElementById("repasswordAlert")
-      .classList.replace("d-block", "d-none");
+    $resultRepass.text(" Enter valid password ");
+    $resultRepass.css("color", "red");
+    return false;
   }
 }
-if (
-  nameValidation() &&
-  emailValidation() &&
-  phoneValidation() &&
-  ageValidation() &&
-  passwordValidation() &&
-  repasswordValidation()
-) {
-  submit.removeAttribute("disabled");
-} else {
-  submit.setAttribute("disabled", true);
+function inputsValidation() {
+  if (
+    validateName() &&
+    validateEmail() &&
+    validatePhone() &&
+    validateAge() &&
+    validatePass() &&
+    repassValidate() == true
+  ) {
+    $("#submitBtn").removeAttr("disabled");
+  } else {
+    $("#submitBtn").attr("disabled", "disabled");
+  }
 }
